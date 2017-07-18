@@ -19,6 +19,8 @@
     <properties>
         <lombok.version>1.16.12</lombok.version>
         <rxjava.version>2.1.1</rxjava.version>
+        <twitter4j.version>4.0.6</twitter4j.version>
+
     </properties>
 
     <dependencyManagement>
@@ -35,6 +37,12 @@
                 <groupId>io.reactivex.rxjava2</groupId>
                 <artifactId>rxjava</artifactId>
                 <version>${rxjava.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.twitter4j</groupId>
+                <artifactId>twitter4j-stream</artifactId>
+                <version>${twitter4j.version}</version>
             </dependency>
 
         </dependencies>

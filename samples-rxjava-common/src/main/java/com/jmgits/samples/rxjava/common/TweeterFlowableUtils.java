@@ -1,26 +1,28 @@
 package com.jmgits.samples.rxjava.common;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
+import io.reactivex.Flowable;
+import io.reactivex.FlowableEmitter;
 
 import java.time.LocalDateTime;
 import java.util.Random;
 import java.util.stream.IntStream;
 
+import static io.reactivex.BackpressureStrategy.MISSING;
+
 /**
  * Created by javi.more.garc on 16/07/17.
  */
-public final class TweeterUtils {
+public final class TweeterFlowableUtils {
 
     public static final int DEFAULT_MESSAGES = 10;
 
-    public static Observable<Tweet> simulateObservableThatCompletes() {
-        return simulateObservableThatCompletes(DEFAULT_MESSAGES);
+    public static Flowable<Tweet> simulateOneThatCompletes() {
+        return simulateOneThatCompletes(DEFAULT_MESSAGES);
     }
 
-    public static Observable<Tweet> simulateObservableThatCompletes(final int numTweets) {
+    public static Flowable<Tweet> simulateOneThatCompletes(final int numTweets) {
 
-        return Observable.create(s ->
+        return Flowable.create(s ->
 
                 new Thread(() -> {
 
@@ -29,12 +31,12 @@ public final class TweeterUtils {
                     s.onComplete();
 
                 }).start()
-        );
+        , MISSING);
     }
 
-    public static Observable<Tweet> simulateObservableThatFails() {
+    public static Flowable<Tweet> simulateOneThatFails() {
 
-        return Observable.create(s ->
+        return Flowable.create(s ->
 
                 new Thread(() -> {
 
@@ -45,16 +47,16 @@ public final class TweeterUtils {
                     s.onError(new RuntimeException("Test error"));
 
                 }).start()
-        );
+        , MISSING);
     }
 
-    private TweeterUtils(){
+    private TweeterFlowableUtils(){
     }
 
     //
     // private methods
 
-    private static void generateNextMessages(ObservableEmitter<Tweet> s, int numTweet) {
+    private static void generateNextMessages(FlowableEmitter<Tweet> s, int numTweet) {
 
         IntStream.range(0, numTweet).forEach(tmp -> {
 

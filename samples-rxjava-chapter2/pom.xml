@@ -28,6 +28,11 @@
             <artifactId>rxjava</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.twitter4j</groupId>
+            <artifactId>twitter4j-stream</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

@@ -2,24 +2,24 @@ package com.jmgits.samples.rxjava.chapter2;
 
 
 import com.jmgits.samples.rxjava.common.Tweet;
-import com.jmgits.samples.rxjava.common.TweeterUtils;
+import com.jmgits.samples.rxjava.common.TweeterObservableUtils;
 import io.reactivex.Observable;
 
 /**
  * Created by javi.more.garc on 16/07/17.
  */
-public class SimpleTweetSubscriber {
+public class TweetAnonymousObserver {
 
     public static void main(String[] args) {
 
         Observable<Tweet> tweetObservable = args.length == 0 || !args[0].toUpperCase().contains("ERROR") ?
-                TweeterUtils.simulateObservableThatCompletes() :
-                TweeterUtils.simulateObservableThatFails();
+                TweeterObservableUtils.simulateOneThatCompletes() :
+                TweeterObservableUtils.simulateOneThatFails();
 
         tweetObservable.subscribe(
-                SimpleTweetSubscriber::printTweet,
-                SimpleTweetSubscriber::printError,
-                SimpleTweetSubscriber::printComplete
+                TweetAnonymousObserver::printTweet,
+                TweetAnonymousObserver::printError,
+                TweetAnonymousObserver::printComplete
         );
     }
 
